@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.websitenavigation.mapper.SearchMapper">
+  <resultMap id="BaseResultMap" type="com.example.websitenavigation.pojo.Search">
+    <id column="search_id" jdbcType="INTEGER" property="searchId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="searchlink" jdbcType="VARCHAR" property="searchlink" />
+    <result column="searchname" jdbcType="VARCHAR" property="searchname" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="placeholder" jdbcType="VARCHAR" property="placeholder" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    search_id, `name`, icon, searchlink, searchname, color, placeholder, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_search
+    where search_id = #{searchId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="com.example.websitenavigation.pojo.Search" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_search
+  </select>
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_search
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_search
+    where search_id = #{searchId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="search_id" keyProperty="searchId" parameterType="com.example.websitenavigation.pojo.Search" useGeneratedKeys="true">
+    insert into t_search (`name`, icon, searchlink, 
+      searchname, color, placeholder, 
+      user_id)
+    values (#{name,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{searchlink,jdbcType=VARCHAR}, 
+      #{searchname,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{placeholder,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="search_id" keyProperty="searchId" parameterType="com.example.websitenavigation.pojo.Search" useGeneratedKeys="true">
+    insert into t_search
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="searchlink != null">
+        searchlink,
+      </if>
+      <if test="searchname != null">
+        searchname,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="placeholder != null">
+        placeholder,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="searchlink != null">
+        #{searchlink,jdbcType=VARCHAR},
+      </if>
+      <if test="searchname != null">
+        #{searchname,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="placeholder != null">
+        #{placeholder,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.websitenavigation.pojo.Search">
+    update t_search
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="searchlink != null">
+        searchlink = #{searchlink,jdbcType=VARCHAR},
+      </if>
+      <if test="searchname != null">
+        searchname = #{searchname,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="placeholder != null">
+        placeholder = #{placeholder,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where search_id = #{searchId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.websitenavigation.pojo.Search">
+    update t_search
+    set `name` = #{name,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      searchlink = #{searchlink,jdbcType=VARCHAR},
+      searchname = #{searchname,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      placeholder = #{placeholder,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER}
+    where search_id = #{searchId,jdbcType=INTEGER}
+  </update>
+</mapper>

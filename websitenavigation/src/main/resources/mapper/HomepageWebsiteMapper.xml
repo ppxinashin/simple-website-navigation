@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.websitenavigation.mapper.HomepageWebsiteMapper">
+  <resultMap id="BaseResultMap" type="com.example.websitenavigation.pojo.HomepageWebsite">
+    <id column="site_id" jdbcType="INTEGER" property="siteId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="box_shadow" jdbcType="VARCHAR" property="boxShadow" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    site_id, `name`, link, box_shadow, icon, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.example.websitenavigation.pojo.HomepageWebsite" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_homepage_website
+    where site_id = #{siteId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByUserId" parameterType="com.example.websitenavigation.pojo.HomepageWebsite" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_homepage_website
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllSites" parameterType="com.example.websitenavigation.pojo.HomepageWebsite" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_homepage_website
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_homepage_website
+    where site_id = #{siteId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="site_id" keyProperty="siteId" parameterType="com.example.websitenavigation.pojo.HomepageWebsite" useGeneratedKeys="true">
+    insert into t_homepage_website (`name`, link, box_shadow, 
+      icon, user_id)
+    values (#{name,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, #{boxShadow,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="site_id" keyProperty="siteId" parameterType="com.example.websitenavigation.pojo.HomepageWebsite" useGeneratedKeys="true">
+    insert into t_homepage_website
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="boxShadow != null">
+        box_shadow,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="boxShadow != null">
+        #{boxShadow,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.websitenavigation.pojo.HomepageWebsite">
+    update t_homepage_website
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="boxShadow != null">
+        box_shadow = #{boxShadow,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where site_id = #{siteId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.websitenavigation.pojo.HomepageWebsite">
+    update t_homepage_website
+    set `name` = #{name,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      box_shadow = #{boxShadow,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER}
+    where site_id = #{siteId,jdbcType=INTEGER}
+  </update>
+</mapper>

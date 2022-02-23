@@ -1,0 +1,14 @@
+# mybatis 配置
+mybatis:
+  type-aliases-package: com.example.websitenavigation.pojo
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations:
+    - classpath:mapper/*.xml
+# MySQL 配置信息
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/navigation
+    username: root
+    password: root
